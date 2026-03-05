@@ -1,0 +1,31 @@
+.decks-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deck-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.deck-card {
+  background: var(--sidebar-bg);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.deck-card h3 {
+  margin-bottom: 10px;
+}
+
+.deck-card button {
+  margin-top: 10px;
+}

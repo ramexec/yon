@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "yon",
+  "version": "0.1.0",
+  "identifier": "com.ramexec.yon",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "yon",
+        "width": 800,
+        "height": 600
+      }
+    ],
+    "security": {
+      "capabilities": [
+        {
+          "identifier": "main-capability",
+          "windows": ["*"],
+          "permissions": [
+            "core:webview:allow-create-webview-window",
+            "core:window:allow-get-all-windows",
+            "core:window:allow-close",
+            "core:window:allow-set-focus"
+          ]
+        }
+      ],
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/logo.ico"
+    ]
+  }
+}
