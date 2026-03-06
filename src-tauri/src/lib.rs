@@ -45,8 +45,10 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![add_deck,
                                                 get_decks,
+
                                                 add_card,
                                                 get_cards,
+                                                
                                                 set_config,
                                                 get_config])
         .run(tauri::generate_context!())

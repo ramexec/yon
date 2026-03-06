@@ -7,7 +7,7 @@ export type Config = {
 }
 
 export type Card = {
-  id: number
+  id?: number
   deck_id: number
   front: string
   back?: string

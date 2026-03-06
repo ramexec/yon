@@ -1,0 +1,42 @@
+.settings-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 30px;
+}
+
+.settings-container h2 {
+  margin-bottom: 25px;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.setting-item label {
+  font-weight: 500;
+}
+
+.setting-item select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: var(--bg);
+  color: var(--text-color);
+}
+
+.save-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+  font-weight: 500;
+}
+
+.save-btn:hover {
+  opacity: 0.9;
+}
