@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react"
 import "./Decks.css"
 import { add_deck } from "../Services/setter"
-import { get_decks, Deck } from "../Services/getter"
+import { get_decks } from "../Services/getter"
 import { create_window } from "../Services/tauri-window/window"
 import { Plus } from "lucide-react"
-
-
+import { Deck } from "../Services/types"
 
 export const Decks = () => {
 

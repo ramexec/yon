@@ -6,11 +6,27 @@ import { Stats } from "./Stats/Stats"
 import { DeckCards } from "./DeckCards/DeckCards"
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow"
 import "./App.css"
+import { useEffect } from "react"
+import { Config, load_settings } from "./Services/getter"
+import { Settings } from "./Settings/Settings"
 
 export default function App() {
 
   const label = getCurrentWebviewWindow().label
   const isDeckWindow = label.startsWith("deck")
+
+
+  const load_settings_from_file = async () => {
+    const settings: Config = await load_settings();
+    if (settings.theme === "dark") {
+      document.body.classList.add("dark")
+    }
+
+  }
+
+  useEffect(() => {
+    load_settings_from_file();
+  }, [])
 
   return (
     <HashRouter>
@@ -26,6 +42,7 @@ export default function App() {
             <Route path="/decks" element={<Decks />} />
             <Route path="/decks/:id" element={<DeckCards />} />
             <Route path="/stats" element={<Stats />} />
+            <Route path="/settings" element={<Settings />} />
 
           </Routes>
         </div>

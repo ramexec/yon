@@ -1,16 +1,5 @@
 import { invoke } from "@tauri-apps/api/core"
-
-export type Deck = {
-  id: number
-  name: string
-}
-
-export type Card = {
-  id: number
-  deck_id: number
-  front: string
-  back?: string
-}
+import { Card, Config, Deck } from "./types"
 
 
 export const get_decks = async () => {
@@ -22,3 +11,8 @@ export const get_cards = async (id: number) => {
     deckId: id
   })
 }
+
+export const load_settings = async() => {
+  return await invoke<Config>("get_config")
+}
+

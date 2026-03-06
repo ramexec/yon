@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, Sun, Moon, LayoutDashboard, Library, BarChart3 } from "lucide-react"
+import { Menu, Sun, Moon, LayoutDashboard, Library, BarChart3, Settings } from "lucide-react"
 import "./Sidebar.css"
 
 export const Sidebar = () => {
@@ -79,6 +79,16 @@ export const Sidebar = () => {
           {!collapsed && <div>Stats</div>}
         </Link>
 
+         <Link
+          to="/settings"
+          className={location.pathname === "/settings" ? "active" : ""}
+          onClick={() => setCollapsed(true)}
+        >
+          <span className="icon">
+            <Settings size={20} />
+          </span>
+          {!collapsed && <div>Settings</div>}
+        </Link>
       </nav>
 
     </div>

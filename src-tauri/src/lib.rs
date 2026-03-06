@@ -1,4 +1,6 @@
 mod db;
+mod config;
+
 use tauri::command;
 
 
@@ -21,10 +23,20 @@ fn add_card(deck_id: i32, front: String, back: String) -> Result<(), String> {
     db::add_card(&conn, deck_id,front,back).map_err(|e| e.to_string())
 }
 
-#[tauri::command]
+#[command]
 fn get_cards(deck_id: i32) -> Result<Vec<db::Card>, String> {
     let conn = db::init_db().map_err(|e| e.to_string())?;
     db::get_cards(&conn, deck_id).map_err(|e| e.to_string())
+}
+
+#[command]
+fn get_config() -> config::AppConfig {
+    config::load_config()
+}
+
+#[command]
+fn set_config(config: config::AppConfig) {
+    config::save_config(&config)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -34,7 +46,9 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![add_deck,
                                                 get_decks,
                                                 add_card,
-                                                get_cards,])
+                                                get_cards,
+                                                set_config,
+                                                get_config])
         .run(tauri::generate_context!())
         .expect("Error while running the application");
 }

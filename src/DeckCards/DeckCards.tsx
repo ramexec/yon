@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { get_cards,Card } from "../Services/getter"
+import { get_cards } from "../Services/getter"
 import { close_current_window } from "../Services/tauri-window/window"
+import { Card } from "../Services/types"
 
 
 export const DeckCards = () => {
