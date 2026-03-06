@@ -4,7 +4,6 @@
   color: var(--text-color);
   transition: width 0.3s;
   padding: 10px;
-
 }
 
 .sidebar.collapsed {
@@ -41,7 +40,7 @@
   justify-content: space-between;
 }
 
-.side-btns>button {
+.side-btns > button {
   background: none;
   border: none;
   font-size: 20px;

@@ -3,6 +3,7 @@ import "./Decks.css"
 import { add_deck } from "../Services/setter"
 import { get_decks, Deck } from "../Services/getter"
 import { create_window } from "../Services/tauri-window/window"
+import { Plus } from "lucide-react"
 
 
 
@@ -40,7 +41,7 @@ export const Decks = () => {
 
       <div className="page-header">
         <h1>Decks</h1>
-        <button onClick={addDeck}>+ New Deck</button>
+        <button className="add_deck" onClick={addDeck}><Plus size={15}/> <span>New Deck</span></button>
       </div>
 
       <div className="deck-list">

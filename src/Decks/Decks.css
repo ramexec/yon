@@ -29,3 +29,10 @@
 .deck-card button {
   margin-top: 10px;
 }
+
+.add_deck {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center ;
+}
