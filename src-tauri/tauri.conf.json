@@ -14,8 +14,8 @@
       {
         "label": "main",
         "title": "yon",
-        "width": 800,
-        "height": 600
+        "width": 1000,
+        "height": 800
       }
     ],
     "security": {
@@ -27,7 +27,8 @@
             "core:webview:allow-create-webview-window",
             "core:window:allow-get-all-windows",
             "core:window:allow-close",
-            "core:window:allow-set-focus"
+            "core:window:allow-set-focus",
+            "core:window:allow-show"
           ]
         }
       ],

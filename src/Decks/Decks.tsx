@@ -3,10 +3,10 @@ import "./Decks.css"
 import { add_deck } from "../Services/setter"
 import { get_decks } from "../Services/getter"
 import { create_window } from "../Services/tauri-window/window"
-import { Plus, CreditCard } from "lucide-react"
+import { Plus, CreditCard, Trash2 } from "lucide-react"
 import { Deck } from "../Services/types"
 import { AddCardPopup } from "../AddCardPopup/AddCardPopup"
-
+import { del_deck } from "../Services/setter"
 
 export const Decks = () => {
 
@@ -23,6 +23,14 @@ export const Decks = () => {
     if (!name) return
 
     await add_deck(name)
+    loadDecks()
+  }
+
+  const deleteDeck = async (id:number) => {
+
+    if(!confirm("Delete this deck and all its cards?")) return
+
+    await del_deck(id)
     loadDecks()
   }
 
@@ -43,7 +51,7 @@ export const Decks = () => {
         <h1>Decks</h1>
 
         <button className="add-deck-btn" onClick={addDeck}>
-          <Plus size={16}/> 
+          <Plus size={16}/>
           <span>New Deck</span>
         </button>
       </div>
@@ -52,9 +60,11 @@ export const Decks = () => {
 
         {decks.map(deck => (
 
-          <div key={deck.id} className="deck-card">
+          <div key={deck.id} className="deck-row">
 
-            <h3>{deck.name}</h3>
+            <div className="deck-info">
+              <h3>{deck.name}</h3>
+            </div>
 
             <div className="deck-actions">
 
@@ -70,7 +80,13 @@ export const Decks = () => {
                 onClick={() => setPopupDeck(deck.id)}
               >
                 <CreditCard size={14}/>
-                Add Card
+              </button>
+
+              <button
+                className="delete-btn"
+                onClick={() => deleteDeck(deck.id)}
+              >
+                <Trash2 size={14}/>
               </button>
 
             </div>

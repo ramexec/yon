@@ -30,6 +30,24 @@ fn get_cards(deck_id: i32) -> Result<Vec<db::Card>, String> {
 }
 
 #[command]
+fn del_card(card_id: i32) -> Result<() , String> {
+    let conn = db::init_db().map_err(|e| e.to_string())?;
+    db::del_card(&conn, card_id)
+}
+
+#[command]
+fn edit_card(card_id: i32,front: String,back: String) -> Result<() , String> {
+    let conn = db::init_db().map_err(|e| e.to_string())?;
+    db::edit_card(&conn,card_id,front,back)
+}
+
+#[command]
+fn del_deck(deck_id: i32) -> Result<() , String> {
+    let conn = db::init_db().map_err(|e| e.to_string())?;
+    db::del_deck(&conn, deck_id)
+}
+
+#[command]
 fn get_config() -> config::AppConfig {
     config::load_config()
 }
@@ -45,12 +63,16 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![add_deck,
                                                 get_decks,
+                                                del_deck,
 
                                                 add_card,
                                                 get_cards,
+                                                del_card,
+                                                edit_card,
                                                 
                                                 set_config,
                                                 get_config])
         .run(tauri::generate_context!())
         .expect("Error while running the application");
 }
+

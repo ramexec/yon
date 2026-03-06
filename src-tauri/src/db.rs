@@ -31,7 +31,7 @@ pub fn init_db() -> Result<Connection> {
             deck_id INTEGER NOT NULL,
             front TEXT NOT NULL,
             back TEXT,
-            FOREIGN KEY(deck_id) REFERENCES decks(id))
+            FOREIGN KEY(deck_id) REFERENCES decks(id) ON DELETE CASCADE ) 
     ",
         [],
     )?;
@@ -94,6 +94,33 @@ pub fn add_card(conn: &Connection, deck_id: i32, front: String, back: String) ->
      conn.execute(
         "INSERT INTO cards (deck_id, front, back) VALUES (?1, ?2, ?3)",
         params![deck_id, front, back],
+    )
+    .map_err(|e| e.to_string())?;
+
+    Ok(())
+}
+
+pub fn del_card(conn: &Connection , card_id: i32) -> Result<(), String> {
+    conn.execute("DELETE FROM cards WHERE id= ?1", params![card_id]).map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+pub fn del_deck(conn: &Connection , deck_id: i32) -> Result<(), String> {
+    conn.execute(
+        "DELETE FROM decks WHERE id = ?1",
+        params![deck_id]
+    ).map_err(|e| e.to_string())?;
+
+    Ok(())
+}
+
+pub fn edit_card(conn: &Connection, card_id: i32, front: String, back: String) -> Result<(), String> {
+
+    conn.execute(
+        "UPDATE cards 
+         SET front = ?1, back = ?2
+         WHERE id = ?3",
+        params![front, back, card_id],
     )
     .map_err(|e| e.to_string())?;
 

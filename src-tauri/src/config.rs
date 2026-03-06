@@ -8,7 +8,7 @@ pub struct AppConfig {
 impl Default for AppConfig {
     fn default() -> Self {
         Self {
-            theme: "light".into(),
+            theme: "dark".into(),
         }
     }
 }

@@ -15,3 +15,19 @@ export const add_card = async (card : Card) => {
                                         back : card.back
      } )
 }
+
+export const edit_card = async (card: Card) => {
+  return await invoke("edit_card", {
+    id : card.id,
+    front : card.front,
+    back : card.back
+  })
+}
+
+export const del_card = async (card_id: number) => {
+    await invoke("del_card", { cardId : card_id })
+}
+
+export const del_deck = async (deck_id: number) => {
+    await invoke("del_deck", { deckId : deck_id })
+}

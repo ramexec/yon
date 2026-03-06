@@ -7,8 +7,9 @@ import { DeckCards } from "./DeckCards/DeckCards"
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow"
 import "./App.css"
 import { useEffect } from "react"
-import { Config, load_settings } from "./Services/getter"
+import { load_settings } from "./Services/getter"
 import { Settings } from "./Settings/Settings"
+import { Config } from "./Services/types"
 
 export default function App() {
 

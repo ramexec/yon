@@ -14,6 +14,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text-color);
+  font-family: "Noto Serif JP", serif;
 }
 
 .main-container {

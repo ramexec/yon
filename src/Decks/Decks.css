@@ -1,5 +1,5 @@
 .decks-page {
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -28,61 +28,78 @@
 }
 
 .deck-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-  gap: 16px;
-}
-
-.deck-card {
-  background: var(--sidebar-bg);
-  border-radius: 12px;
-  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.15s ease;
 }
 
-.deck-card:hover {
-  transform: translateY(-3px);
+.deck-row {
+  background: var(--sidebar-bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: background 0.15s ease;
 }
 
-.deck-card h3 {
+.deck-row:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.dark .deck-row:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.deck-info h3 {
   margin: 0;
+  font-size: 16px;
 }
 
 .deck-actions {
   display: flex;
-  justify-content: space-between;
   gap: 8px;
 }
 
 .open-btn {
-  flex: 1;
   border: none;
   background: #22c55e;
   color: white;
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .add-card-btn {
-  flex: 1;
   border: none;
   background: #3b82f6;
   color: white;
-  padding: 6px;
+  padding: 6px 8px;
   border-radius: 6px;
   cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+}
+
+.delete-btn {
+  border: none;
+  background: #ef4444;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .open-btn:hover,
-.add-card-btn:hover {
+.add-card-btn:hover,
+.delete-btn:hover {
   opacity: 0.9;
 }

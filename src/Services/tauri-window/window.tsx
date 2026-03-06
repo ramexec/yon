@@ -16,11 +16,12 @@ export const create_window = async (label: string, navigate: string,
         url: navigate,
         title: title,
         width: width,
-        height: height
+        height: height,
+        visible: false
     })
 
-    win.once("tauri://created", () => {
-        console.log("Deck window created")
+    win.once("tauri://created", async () => {
+        await win.show()
     })
 
     win.once("tauri://error", (e) => {
