@@ -83,8 +83,6 @@ pub fn get_cards(conn: &Connection, deck_id: i32) -> Result<Vec<Card>> {
     Ok(cards)
 }
 
-
-
 pub fn add_deck(conn: &Connection, name :String) -> Result<(), String> {
     conn.execute("INSERT INTO decks (name) VALUES (?1)", params![name])
         .map_err(|e| e.to_string())?;

@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react"
 import "./Decks.css"
-import { invoke } from "@tauri-apps/api/core"
-import { WebviewWindow, getAllWebviewWindows } from "@tauri-apps/api/webviewWindow"
+import { add_deck } from "../Services/setter"
+import { get_decks, Deck } from "../Services/getter"
+import { create_window } from "../Services/tauri-window/window"
 
-type Deck = {
-  id: number
-  name: string
-}
+
 
 export const Decks = () => {
 
   const [decks, setDecks] = useState<Deck[]>([])
 
   const loadDecks = async () => {
-    const result = await invoke<Deck[]>("get_decks")
+    const result = await get_decks();
     setDecks(result)
   }
 
@@ -22,38 +20,16 @@ export const Decks = () => {
     const name = prompt("Deck name")
     if (!name) return
 
-    await invoke("add_deck", { name })
+    add_deck(name)
     loadDecks()
   }
 
   const openDeck = async (id: number) => {
 
-  const label = `deck-${id}`
+    const label = `deck-${id}`
+    await create_window(label,`/#/decks/${id}`,'Deck Cards')
 
-  const windows = await getAllWebviewWindows()
-
-  const existing = windows.find(w => w.label === label)
-
-  if (existing) {
-    await existing.setFocus()
-    return
   }
-
-  const win = new WebviewWindow(label, {
-    url: `/#/decks/${id}`,
-    title: "Deck Cards",
-    width: 700,
-    height: 500
-  })
-
-  win.once("tauri://created", () => {
-    console.log("Deck window created")
-  })
-
-  win.once("tauri://error", (e) => {
-    console.error("Window error:", e)
-  })
-}
   useEffect(() => {
     loadDecks()
   }, [])
@@ -71,13 +47,10 @@ export const Decks = () => {
 
         {decks.map(deck => (
           <div key={deck.id} className="deck-card">
-
             <h3>{deck.name}</h3>
-
             <button onClick={() => openDeck(deck.id)}>
               Open
             </button>
-
           </div>
         ))}
 

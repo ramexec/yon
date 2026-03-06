@@ -1,34 +1,22 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { invoke } from "@tauri-apps/api/core"
-import { getCurrentWindow } from "@tauri-apps/api/window"
+import { get_cards,Card } from "../Services/getter"
+import { close_current_window } from "../Services/tauri-window/window"
 
-type Card = {
-  id: number
-  deck_id: number
-  front: string
-  back?: string
-}
 
 export const DeckCards = () => {
 
   const { id } = useParams<{ id: string }>()
-
   const [cards, setCards] = useState<Card[]>([])
 
   const loadCards = async () => {
-
     if (!id) return
-
-    const result = await invoke<Card[]>("get_cards", {
-      deckId: Number(id)
-    })
-
+    const result = await get_cards(Number(id));
     setCards(result)
   }
 
-  const closeWindow = async () => {
-    await getCurrentWindow().close()
+  const close_window = async () => {
+    await close_current_window();
   }
 
   useEffect(() => {
@@ -41,7 +29,7 @@ export const DeckCards = () => {
 
       <h1>Deck {id}</h1>
 
-      <button onClick={closeWindow}>
+      <button onClick={close_window}>
         Close Window
       </button>
 
